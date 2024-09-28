@@ -28,5 +28,5 @@ const controlRecipes = async function () {
 };
 
 ['load', 'hashchange'].forEach(event =>
-  window.addEventListener(event, showRecipe)
+  window.addEventListener(event, controlRecipes)
 );
