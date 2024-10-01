@@ -64,7 +64,7 @@
 110D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\transformer-babel\src\config.js133713719435334700 0
 126D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\internals\fix-regexp-well-known-symbol-logic.js133718568478501566 0
 107D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\modules\es.typed-array.of.js133718568476754853 0
-62D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist133722089206785830 1
+62D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist133722533819942488 1
 94D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\svgo\lib\stringifier.js133713719437176224 0
 86D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\src\sass\_searchResults.scss133713702524638098 0
 88D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\timsort\README.md133713719433592245 0
@@ -252,7 +252,7 @@
 94D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\msgpackr\test-worker.js133713719437094111 0
 110D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\es\array\virtual\to-reversed.js133718568485546396 0
 94D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\nullthrows\package.json133713719432854603 0
-77D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\src\sass\_base.scss133721813468346988 0
+77D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\src\sass\_base.scss133722534029095178 0
 112D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\actual\object\set-prototype-of.js133718568484116323 0
 92D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\get-port\package.json133713719432854603 0
 85D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\domelementtype133713719435234248 1
@@ -332,7 +332,7 @@
 87D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\msgpackr-extract133713719434854029 1
 103D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\node-gyp-build-optional-packages133713719434734888 1
 114D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\lmdb\node_modules\node-addon-api\napi-inl.h133713719435474745 0
-73D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\src\js\model.js133722088377852698 0
+73D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\src\js\model.js133722531714912705 0
 110D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\modules\esnext.iterator.take.js133718568477148990 0
 85D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\csso\README.md133713719440047252 0
 79D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\boolbase133713719433434792 1
@@ -2459,7 +2459,7 @@
 93D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\color-convert\route.js133713719434854029 0
 106D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\es\string\virtual\anchor.js133718568473442081 0
 103D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\es\number\constructor.js133718568474688965 0
-81D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\icons.21bad73c.svg133722088159787941 0
+81D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\icons.21bad73c.svg133722533819942488 0
 96D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\domutils\lib\traversal.js133713719435334700 0
 101D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@swc\helpers\_\_async_iterator133713719436186500 1
 96D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\msgpackr\rollup.config.js133713719436689335 0
@@ -5267,7 +5267,7 @@
 103D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\stable\array\is-array.js133718568480898227 0
 103D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\stable\array\iterator.js133718568481654819 0
 98D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\stable\array\map.js133718568482235972 0
-85D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.f7626f62.css.map133722088159636688 0
+85D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.f7626f62.css.map133722533819903844 0
 101D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\stable\array\reduce.js133718568483580806 0
 110D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\features\array\filter-reject.js133718568477970434 0
 100D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\stable\array\slice.js133718568484342027 0
@@ -6099,7 +6099,7 @@
 101D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\symbol\replace.js133718568483810405 0
 143D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\node\Rule.js133713719440209389 0
 100D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\features\math\log2.js133718568482041337 0
-83D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\favicon.8b2f57bf.png133722088159787941 0
+83D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\favicon.8b2f57bf.png133722533819942488 0
 144D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\optimizer-svgo\node_modules\csso\lib\replace\AttributeSelector.js133713719435958112 0
 100D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\symbol\search.js133718568483979599 0
 101D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\symbol\species.js133718568484581496 0
@@ -6394,7 +6394,7 @@
 100D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\instance\flat.js133718568478664670 0
 94D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\es\math\tanh.js133718568485162302 0
 104D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\instance\for-each.js133718568478849417 0
-73D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.html133722050650727410 0
+73D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.html133722533819868789 0
 104D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\instance\group-by.js133718568479598140 0
 107D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\reporter-tracer\package.json133713719434144071 0
 108D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\core-js\full\instance\group-to-map.js133718568479654077 0
@@ -8770,7 +8770,7 @@
 108D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\runtime-react-refresh\LICENSE133713719432854603 0
 113D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\runtime-react-refresh\package.json133713719434144071 0
 104D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\runtime-react-refresh\src133713719433673159 1
-81D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\icons.dfd7a6db.svg133722088159582215 0
+81D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\icons.dfd7a6db.svg133722533819868789 0
 93D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\runtime-js\lib133713719437652483 1
 97D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\runtime-js\LICENSE133713719433434792 0
 102D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\node_modules\@parcel\runtime-js\package.json133713719438406782 0
@@ -9709,7 +9709,7 @@
 86D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\Forkify App.3464ddca.js133713719709650134 0
 80D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.62406edb.js133713719709650134 0
 84D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.62406edb.js.map133713719709690000 0
-80D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.e37f48ea.js133722089206724904 0
-84D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.e37f48ea.js.map133722089206785830 0
-81D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.f7626f62.css133722088159602259 0
-80D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\logo.726d37a8.png133722088159602259 0
+81D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.f7626f62.css133722533819868789 0
+80D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\logo.726d37a8.png133722533819868789 0
+80D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.e37f48ea.js133722533819942488 0
+84D:\zeyad\JavaScript Course\javaScript Summary\Forkify App\dist\index.e37f48ea.js.map133722533819942488 0
