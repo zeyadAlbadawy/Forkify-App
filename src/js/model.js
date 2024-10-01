@@ -8,7 +8,7 @@ export const state = {
     query: '',
     searchResults: [],
     page: 1,
-    itemsPerPage: 10,
+    itemsPerPage: RECEPIE_PER_PAGE,
   },
 };
 
@@ -26,7 +26,6 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    console.log(recipe);
   } catch (err) {
     throw err;
   }
@@ -50,6 +49,7 @@ export const loadSearchResults = async function (query) {
 };
 
 export const recipesPerPage = function (page = state.searchRecipe.page) {
+  state.searchRecipe.page = page;
   const start = (page - 1) * RECEPIE_PER_PAGE;
   const end = page * RECEPIE_PER_PAGE;
   return state.searchRecipe.searchResults.slice(start, end);
