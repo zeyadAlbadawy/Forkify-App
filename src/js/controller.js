@@ -42,10 +42,25 @@ const controlNextPrevBtns = function (actionNeeded) {
     model.state.searchRecipe.page = model.state.searchRecipe.page - 1;
   resultsView.render(model.recipesPerPage(model.state.searchRecipe.page));
   paginationView.render(model.state.searchRecipe);
+};
 
-  // (model.state.page);
+const controlServings = function (actionNeeded) {
+  // Update the no of serviongs
+  let newServings = model.state.recipe.servings;
+  if (actionNeeded === 'PLUS') newServings = model.state.recipe.servings + 1;
+
+  if (actionNeeded === 'MINUS') newServings = model.state.recipe.servings - 1;
+  if (newServings <= 0) {
+    model.state.recipe.servings = 1;
+    return;
+  }
+  model.updateNoOfServings(newServings);
+  // re-render the recipe view
+  recipeView.render(model.state.recipe);
+  console.log(model.state);
 };
 
 recipeView._addHandelerRender(controlRecipes);
 searchView._addHandelerSearch(controlSearchResults);
 paginationView._addHandelerBtn(controlNextPrevBtns);
+recipeView._addHandelerReRender(controlServings);
