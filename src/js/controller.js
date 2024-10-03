@@ -69,8 +69,15 @@ const controlBookMarks = function () {
   recipeView._update(model.state.recipe);
   bookmarksView.render(model.state.bookmarks);
 };
+
+const handlerForBookmarks = function () {
+  model.reRenderTheBookmarks();
+  bookmarksView.render(model.state.bookmarks);
+};
+
 recipeView._addHandelerRender(controlRecipes);
 searchView._addHandelerSearch(controlSearchResults);
 paginationView._addHandelerBtn(controlNextPrevBtns);
 recipeView._addHandelerReRender(controlServings);
 recipeView._addHandelerBookMarks(controlBookMarks);
+bookmarksView._updateHandeler(handlerForBookmarks);

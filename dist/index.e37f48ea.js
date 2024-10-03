@@ -652,11 +652,16 @@ const controlBookMarks = function() {
     (0, _recipeViewJsDefault.default)._update(_modelJs.state.recipe);
     (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
+const handlerForBookmarks = function() {
+    _modelJs.reRenderTheBookmarks();
+    (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
+};
 (0, _recipeViewJsDefault.default)._addHandelerRender(controlRecipes);
 (0, _searchViewJsDefault.default)._addHandelerSearch(controlSearchResults);
 (0, _paginationViewJsDefault.default)._addHandelerBtn(controlNextPrevBtns);
 (0, _recipeViewJsDefault.default)._addHandelerReRender(controlServings);
 (0, _recipeViewJsDefault.default)._addHandelerBookMarks(controlBookMarks);
+(0, _bookmarksViewJsDefault.default)._updateHandeler(handlerForBookmarks);
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarksView.js":"4Lqzq"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -2534,11 +2539,10 @@ parcelHelpers.export(exports, "recipesPerPage", ()=>recipesPerPage);
 parcelHelpers.export(exports, "updateNoOfServings", ()=>updateNoOfServings);
 parcelHelpers.export(exports, "addBookMark", ()=>addBookMark);
 parcelHelpers.export(exports, "deleteBookMark", ()=>deleteBookMark);
+parcelHelpers.export(exports, "reRenderTheBookmarks", ()=>reRenderTheBookmarks);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helperJs = require("./helper.js");
-var _recipeViewJs = require("./views/recipeView.js");
-var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 const state = {
     recipe: {},
     searchRecipe: {
@@ -2600,16 +2604,28 @@ const updateNoOfServings = function(noOfServings) {
 const addBookMark = function(recipe) {
     // Add The Recipe to the bookmarks
     // Check if the required recipe is bookmarked before
+    console.log();
     state.bookmarks.push(recipe);
     if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+    keepLocalStorage();
 };
 const deleteBookMark = function(id) {
     const index = state.bookmarks.findIndex((bookmark)=>bookmark.id === id);
     state.bookmarks.splice(index, 1);
     if (id === state.recipe.id) state.recipe.bookmarked = false;
+    keepLocalStorage();
+};
+const keepLocalStorage = function() {
+    localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+};
+const reRenderTheBookmarks = function() {
+    if (!localStorage.getItem("bookmarks")) return;
+    JSON.parse(localStorage.getItem("bookmarks")).forEach((bookmark)=>{
+        addBookMark(bookmark);
+    });
 };
 
-},{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/recipeView.js":"l60JC"}],"k5Hzs":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -3240,6 +3256,9 @@ var _previewViewJsDefault = parcelHelpers.interopDefault(_previewViewJs);
 class bookmarksView extends (0, _previewViewJsDefault.default) {
     _parentElement = document.querySelector(".bookmarks__list");
     _errorMessage = "No Bookmarks Available yet! Try Searching For new Recipe:)";
+    _updateHandeler(handeler) {
+        window.addEventListener("load", handeler);
+    }
 }
 exports.default = new bookmarksView();
 

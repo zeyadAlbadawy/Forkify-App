@@ -1,7 +1,6 @@
 import { async } from 'regenerator-runtime';
 import { API_URL, RECEPIE_PER_PAGE } from './config.js';
 import { getJson } from './helper.js';
-import recipeView from './views/recipeView.js';
 
 export const state = {
   recipe: {},
@@ -73,12 +72,26 @@ export const updateNoOfServings = function (noOfServings) {
 export const addBookMark = function (recipe) {
   // Add The Recipe to the bookmarks
   // Check if the required recipe is bookmarked before
+  console.log();
   state.bookmarks.push(recipe);
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+  keepLocalStorage();
 };
 
 export const deleteBookMark = function (id) {
   const index = state.bookmarks.findIndex(bookmark => bookmark.id === id);
   state.bookmarks.splice(index, 1);
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  keepLocalStorage();
+};
+
+const keepLocalStorage = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
+export const reRenderTheBookmarks = function () {
+  if (!localStorage.getItem('bookmarks')) return;
+  JSON.parse(localStorage.getItem('bookmarks')).forEach(bookmark => {
+    addBookMark(bookmark);
+  });
 };
