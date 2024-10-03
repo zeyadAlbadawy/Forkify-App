@@ -12,6 +12,34 @@ export default class View {
     this._parentElement.innerHTML = '';
   }
 
+  _update(data) {
+    if (!data || (Array.isArray(data) && !data.length)) return;
+    this.data = data;
+    const newMarkup = this._generateMarkUps(this._data);
+    const newDomElements = Array.from(
+      document
+        .createRange()
+        .createContextualFragment(newMarkup)
+        .querySelectorAll('*')
+    );
+    const currDomElements = Array.from(
+      this._parentElement.querySelectorAll('*')
+    );
+    newDomElements.forEach((newElmnt, i) => {
+      const currElmnt = currDomElements[i];
+      if (
+        !newElmnt.isEqualNode(currElmnt) &&
+        newElmnt.firstChild?.nodeValue.trim() !== ''
+      )
+        currElmnt.textContent = newElmnt.textContent;
+
+      if (!newElmnt.isEqualNode(currElmnt)) {
+        Array.from(newElmnt.attributes).forEach(attr => {
+          currElmnt.setAttribute(attr.name, attr.value);
+        });
+      }
+    });
+  }
   loadSpinner() {
     this._clear();
     const spinnerCreation = `<div class="spinner">
