@@ -7,6 +7,9 @@ import ResultsView from './views/resultsView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
+import { POP_UP_SEC } from './config.js';
+import addRecipeView from './views/addRecipeView.js';
+// import { set } from 'core-js/core/dict';
 // https://forkify-api.herokuapp.com/v2
 
 const controlRecipes = async function () {
@@ -22,6 +25,7 @@ const controlRecipes = async function () {
     resultsView._update(model.recipesPerPage());
     bookmarksView._update(model.state.bookmarks);
   } catch (err) {
+    console.log(err);
     recipeView._renderErrorMsg();
   }
 };
@@ -75,9 +79,24 @@ const handlerForBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlAddRecipes = async function (data) {
+  try {
+    await model.uploadRecipe(data);
+    recipeView.render(model.state.recipe);
+    addRecipeView._renderMsg();
+    // setTimeout(() => {
+    //   addRecipeView._toggleHiddenForm();
+    // }, POP_UP_SEC);
+  } catch (err) {
+    addRecipeView._renderErrorMsg(err.message);
+    console.log(err);
+  }
+};
+
 recipeView._addHandelerRender(controlRecipes);
 searchView._addHandelerSearch(controlSearchResults);
 paginationView._addHandelerBtn(controlNextPrevBtns);
 recipeView._addHandelerReRender(controlServings);
 recipeView._addHandelerBookMarks(controlBookMarks);
 bookmarksView._updateHandeler(handlerForBookmarks);
+addRecipeView._addHandelerGetData(controlAddRecipes);

@@ -1,3 +1,5 @@
+// import { make } from 'core-js/core/object';
+// import { mark } from 'regenerator-runtime';
 import icons from 'url:../../img/icons.svg';
 export default class View {
   render(data) {
@@ -27,6 +29,7 @@ export default class View {
     );
     newDomElements.forEach((newElmnt, i) => {
       const currElmnt = currDomElements[i];
+      if (!currElmnt) return;
       if (
         !newElmnt.isEqualNode(currElmnt) &&
         newElmnt.firstChild?.nodeValue.trim() !== ''
@@ -60,5 +63,18 @@ export default class View {
           </div>`;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markUp);
+  }
+
+  _renderMsg(message = this._message) {
+    const markup = `<div class="message">
+            <div>
+              <svg>
+                <use href="${icons}#icon-smile"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>`;
+    this._clear();
+    this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 }

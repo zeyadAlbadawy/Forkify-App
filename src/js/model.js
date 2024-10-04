@@ -1,6 +1,8 @@
 import { async } from 'regenerator-runtime';
 import { API_URL, RECEPIE_PER_PAGE } from './config.js';
-import { getJson } from './helper.js';
+import { getJson, sendJSON } from './helper.js';
+import bookmarksView from './views/bookmarksView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 export const state = {
   recipe: {},
@@ -13,26 +15,31 @@ export const state = {
   bookmarks: [],
 };
 
+const createRecipe = function (recipe) {
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceUrl: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients,
+    bookmarked: false,
+    ...(recipe.key && { key: recipe.key }),
+  };
+};
 export const loadRecipe = async function (id) {
   try {
     const data = await getJson(`${API_URL}${id}`);
     const { recipe } = data.data;
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-      bookmarked: false,
-    };
+    state.recipe = createRecipe(recipe);
 
     state.bookmarks.forEach(bookmark => {
       if (bookmark.id === id) state.recipe.bookmarked = true;
     });
   } catch (err) {
+    console.log(err);
     throw err;
   }
 };
@@ -50,6 +57,7 @@ export const loadSearchResults = async function (query) {
       };
     });
   } catch (err) {
+    console.log(err);
     throw err;
   }
 };
@@ -72,10 +80,11 @@ export const updateNoOfServings = function (noOfServings) {
 export const addBookMark = function (recipe) {
   // Add The Recipe to the bookmarks
   // Check if the required recipe is bookmarked before
-  console.log();
   state.bookmarks.push(recipe);
+
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
   keepLocalStorage();
+  bookmarksView.render(state.bookmarks);
 };
 
 export const deleteBookMark = function (id) {
@@ -94,4 +103,45 @@ export const reRenderTheBookmarks = function () {
   JSON.parse(localStorage.getItem('bookmarks')).forEach(bookmark => {
     addBookMark(bookmark);
   });
+};
+
+export const uploadRecipe = async function (newRecipe) {
+  //1) Take the Input Data And Make it similar to the one from API
+  try {
+    const ingredients = Object.entries(newRecipe)
+      .filter(
+        rec =>
+          rec[0].replaceAll(' ', '').startsWith('ingredient') && rec[1] !== ''
+      )
+      .map(ing => {
+        const componentOfIng = ing[1].split(',');
+        if (componentOfIng.length != 3)
+          throw new Error(
+            `The Entered Ingredients Are Not Correct ! Try Follow The Correct Ones :)`
+          );
+        const [quantity, unit, description] = componentOfIng;
+        return {
+          quantity: quantity ? +quantity : null,
+          unit,
+          description,
+        };
+      });
+
+    const recipe = {
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      servings: +newRecipe.servings,
+      cooking_time: +newRecipe.cookingTime,
+      publisher: newRecipe.publisher,
+      ingredients,
+    };
+    const recivedRecipe = await sendJSON(API_URL, recipe);
+    // console.log(recivedRecipe);
+    state.recipe = createRecipe(recivedRecipe.data.recipe);
+    addBookMark(state.recipe);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };

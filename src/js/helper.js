@@ -1,4 +1,4 @@
-import { TIMEOUT_SEC } from './config.js';
+import { API_KEY, TIMEOUT_SEC } from './config.js';
 export const timeOut = async function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -13,6 +13,23 @@ export const getJson = async function (URL) {
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
     return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const sendJSON = async function (URL, data) {
+  try {
+    const res = await fetch(`${URL}?key=${API_KEY}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const responsedData = await res.json();
+    if (!res.ok) throw new Error(`${responsedData.message} (${res.status})`);
+    return responsedData;
   } catch (err) {
     throw err;
   }
