@@ -101,4 +101,5 @@ paginationView._addHandelerBtn(controlNextPrevBtns);
 recipeView._addHandelerReRender(controlServings);
 recipeView._addHandelerBookMarks(controlBookMarks);
 bookmarksView._updateHandeler(handlerForBookmarks);
+console.log('integration');
 addRecipeView._addHandelerGetData(controlAddRecipes);
