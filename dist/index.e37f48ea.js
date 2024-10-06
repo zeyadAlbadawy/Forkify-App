@@ -666,6 +666,9 @@ const controlAddRecipes = async function(data) {
         await _modelJs.uploadRecipe(data);
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
         (0, _addRecipeViewJsDefault.default)._renderMsg();
+        (0, _bookmarksViewJsDefault.default).render(_modelJs.state.bookmarks);
+        // Change ID in the URL
+        window.history.pushState(null, "", `#${_modelJs.state.recipe.id}`);
     // setTimeout(() => {
     //   addRecipeView._toggleHiddenForm();
     // }, POP_UP_SEC);
@@ -759,7 +762,7 @@ const createRecipe = function(recipe) {
 };
 const loadRecipe = async function(id) {
     try {
-        const data = await (0, _helperJs.getJson)(`${(0, _configJs.API_URL)}${id}`);
+        const data = await (0, _helperJs.getJson)(`${(0, _configJs.API_URL)}${id}?key=${(0, _configJs.API_KEY)}`);
         const { recipe } = data.data;
         state.recipe = createRecipe(recipe);
         state.bookmarks.forEach((bookmark)=>{
@@ -773,13 +776,16 @@ const loadRecipe = async function(id) {
 const loadSearchResults = async function(query) {
     try {
         state.searchRecipe.query = query;
-        const data = await (0, _helperJs.getJson)(`${(0, _configJs.API_URL)}?search=${query}`);
+        const data = await (0, _helperJs.getJson)(`${(0, _configJs.API_URL)}?search=${query}&key=${(0, _configJs.API_KEY)}`);
         state.searchRecipe.searchResults = data.data.recipes.map((recipe)=>{
             return {
                 id: recipe.id,
                 title: recipe.title,
                 publisher: recipe.publisher,
-                image: recipe.image_url
+                image: recipe.image_url,
+                ...recipe.key && {
+                    key: recipe.key
+                }
             };
         });
     } catch (err) {
@@ -803,7 +809,6 @@ const addBookMark = function(recipe) {
     state.bookmarks.push(recipe);
     if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
     keepLocalStorage();
-    (0, _bookmarksViewJsDefault.default).render(state.bookmarks);
 };
 const deleteBookMark = function(id) {
     const index = state.bookmarks.findIndex((bookmark)=>bookmark.id === id);
@@ -1634,8 +1639,14 @@ class PreviewView extends (0, _viewJsDefault.default) {
             <img src="${rec.image}" />
           </figure>
           <div class="preview__data">
+ 
             <h4 class="preview__title">${rec.title}</h4>
             <p class="preview__publisher">${rec.publisher}</p>
+      <div class="preview__user-generated ${this._data.key ? "" : "hidden"}">
+        <svg>
+          <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+        </svg>
+      </div>
           </div>
         </a>
       </li>`;
@@ -1739,8 +1750,11 @@ class RecipeView extends (0, _viewJsDefault.default) {
       </div>
     </div>
 
-    <div class="recipe__user-generated">
-    </div>
+      <div class="recipe__user-generated ${this._data.key ? "" : "hidden"}">
+        <svg>
+          <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+        </svg>
+      </div>
     <button class="btn--round btn--Bookmarked">
           <svg class="">
               <use href="${0, _iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? "-fill" : ""}"></use>

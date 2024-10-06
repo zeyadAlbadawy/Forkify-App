@@ -1,5 +1,5 @@
 import { async } from 'regenerator-runtime';
-import { API_URL, RECEPIE_PER_PAGE } from './config.js';
+import { API_URL, RECEPIE_PER_PAGE, API_KEY } from './config.js';
 import { getJson, sendJSON } from './helper.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
@@ -31,7 +31,7 @@ const createRecipe = function (recipe) {
 };
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJson(`${API_URL}${id}`);
+    const data = await getJson(`${API_URL}${id}?key=${API_KEY}`);
     const { recipe } = data.data;
     state.recipe = createRecipe(recipe);
 
@@ -47,13 +47,14 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     state.searchRecipe.query = query;
-    const data = await getJson(`${API_URL}?search=${query}`);
+    const data = await getJson(`${API_URL}?search=${query}&key=${API_KEY}`);
     state.searchRecipe.searchResults = data.data.recipes.map(recipe => {
       return {
         id: recipe.id,
         title: recipe.title,
         publisher: recipe.publisher,
         image: recipe.image_url,
+        ...(recipe.key && { key: recipe.key }),
       };
     });
   } catch (err) {
@@ -84,7 +85,6 @@ export const addBookMark = function (recipe) {
 
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
   keepLocalStorage();
-  bookmarksView.render(state.bookmarks);
 };
 
 export const deleteBookMark = function (id) {

@@ -84,6 +84,10 @@ const controlAddRecipes = async function (data) {
     await model.uploadRecipe(data);
     recipeView.render(model.state.recipe);
     addRecipeView._renderMsg();
+    bookmarksView.render(model.state.bookmarks);
+
+    // Change ID in the URL
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
     // setTimeout(() => {
     //   addRecipeView._toggleHiddenForm();
     // }, POP_UP_SEC);
