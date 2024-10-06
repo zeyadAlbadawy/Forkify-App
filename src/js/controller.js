@@ -25,7 +25,6 @@ const controlRecipes = async function () {
     resultsView._update(model.recipesPerPage());
     bookmarksView._update(model.state.bookmarks);
   } catch (err) {
-    console.log(err);
     recipeView._renderErrorMsg();
   }
 };
@@ -93,7 +92,6 @@ const controlAddRecipes = async function (data) {
     // }, POP_UP_SEC);
   } catch (err) {
     addRecipeView._renderErrorMsg(err.message);
-    console.log(err);
   }
 };
 

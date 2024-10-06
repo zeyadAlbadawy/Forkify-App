@@ -58,7 +58,6 @@ export const loadSearchResults = async function (query) {
       };
     });
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };
@@ -141,7 +140,6 @@ export const uploadRecipe = async function (newRecipe) {
     state.recipe = createRecipe(recivedRecipe.data.recipe);
     addBookMark(state.recipe);
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };
