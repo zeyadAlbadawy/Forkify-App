@@ -38,7 +38,7 @@ const controlSearchResults = async function (query) {
     ResultsView.render(model.recipesPerPage());
     paginationView.render(model.state.searchRecipe);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
