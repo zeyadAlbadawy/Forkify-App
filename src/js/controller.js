@@ -9,6 +9,7 @@ import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import { POP_UP_SEC } from './config.js';
 import addRecipeView from './views/addRecipeView.js';
+import shoppingView from './views/shoppingView.js';
 // import { set } from 'core-js/core/dict';
 // https://forkify-api.herokuapp.com/v2
 
@@ -71,6 +72,7 @@ const controlBookMarks = function () {
   else model.deleteBookMark(model.state.recipe.id);
   recipeView._update(model.state.recipe);
   bookmarksView.render(model.state.bookmarks);
+  shoppingView.render(model.state.bookmarks);
 };
 
 const handlerForBookmarks = function () {
@@ -95,6 +97,8 @@ const controlAddRecipes = async function (data) {
   }
 };
 
+const controlShoppingCart = function () {};
+
 recipeView._addHandelerRender(controlRecipes);
 searchView._addHandelerSearch(controlSearchResults);
 paginationView._addHandelerBtn(controlNextPrevBtns);
@@ -102,3 +106,4 @@ recipeView._addHandelerReRender(controlServings);
 recipeView._addHandelerBookMarks(controlBookMarks);
 bookmarksView._updateHandeler(handlerForBookmarks);
 addRecipeView._addHandelerGetData(controlAddRecipes);
+// shoppingView._updateShoppingClick(controlShoppingCart);

@@ -1,8 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { API_URL, RECEPIE_PER_PAGE, API_KEY } from './config.js';
 import { getJson, sendJSON } from './helper.js';
-import bookmarksView from './views/bookmarksView.js';
-import addRecipeView from './views/addRecipeView.js';
+import shoppingView from './views/shoppingView.js';
 
 export const state = {
   recipe: {},
@@ -13,6 +12,7 @@ export const state = {
     itemsPerPage: RECEPIE_PER_PAGE,
   },
   bookmarks: [],
+  cart: [],
 };
 
 const createRecipe = function (recipe) {
@@ -34,7 +34,6 @@ export const loadRecipe = async function (id) {
     const data = await getJson(`${API_URL}${id}?key=${API_KEY}`);
     const { recipe } = data.data;
     state.recipe = createRecipe(recipe);
-
     state.bookmarks.forEach(bookmark => {
       if (bookmark.id === id) state.recipe.bookmarked = true;
     });
@@ -81,7 +80,10 @@ export const addBookMark = function (recipe) {
   // Add The Recipe to the bookmarks
   // Check if the required recipe is bookmarked before
   state.bookmarks.push(recipe);
-
+  // Push To carts
+  const tempDescription = recipe.ingredients.map(ing => ing.description);
+  state.cart.push(...tempDescription);
+  /////////////// DESCRIPTION ARRAY /////////////
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
   keepLocalStorage();
 };
@@ -90,6 +92,7 @@ export const deleteBookMark = function (id) {
   const index = state.bookmarks.findIndex(bookmark => bookmark.id === id);
   state.bookmarks.splice(index, 1);
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  shoppingView.render(state.bookmarks);
   keepLocalStorage();
 };
 
@@ -102,6 +105,7 @@ export const reRenderTheBookmarks = function () {
   JSON.parse(localStorage.getItem('bookmarks')).forEach(bookmark => {
     addBookMark(bookmark);
   });
+  shoppingView.render(state.bookmarks);
 };
 
 export const uploadRecipe = async function (newRecipe) {
