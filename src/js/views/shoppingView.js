@@ -6,9 +6,6 @@ class ShoppingView extends View {
   _data;
   _errorMessage = 'No Items yet. Find a nice recipe! :)';
 
-  // _updateShoppingClick(handeler) {
-  //   this._parentElement.addEventListener('click', handeler);
-  // }
   _initSearchList(rec, info) {
     return `<li class="preview">
         <a class="preview__link" href="#${info.id}">

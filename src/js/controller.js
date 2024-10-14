@@ -22,6 +22,14 @@ const controlRecipes = async function () {
     // Load Recipe
     await model.loadRecipe(id);
     // Render The Recipe
+    const finalIngregients = [];
+    model.state.recipe.ingredients.forEach(ing => {
+      let splittedOne = ing.description.split(' ');
+      finalIngregients.push(splittedOne[splittedOne.length - 1]);
+    });
+
+    // Get The Similar Recipes =>>
+    await model.getTotalCalories(finalIngregients);
     recipeView.render(model.state.recipe);
     resultsView._update(model.recipesPerPage());
     bookmarksView._update(model.state.bookmarks);

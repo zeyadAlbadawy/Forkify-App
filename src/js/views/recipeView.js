@@ -33,6 +33,7 @@ class RecipeView extends View {
       <span class="recipe__info-data recipe__info-data--people">${
         this._data.servings
       }</span>
+
       <span class="recipe__info-text">servings</span>
 
       <div class="recipe__info-buttons">
@@ -49,6 +50,8 @@ class RecipeView extends View {
       </div>
     </div>
 
+
+    
       <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
         <svg>
           <use href="${icons}#icon-user"></use>
@@ -87,7 +90,20 @@ class RecipeView extends View {
     </ul>
   </div>
 
-  <div class="recipe__directions">
+
+
+
+<div class="recipe__directions">
+  <img 
+    src="${this._data.imageURL.url}" 
+    alt="${this._data.title}" 
+    class="recipe__img" 
+    style="width: 115%; height: 100%; object-fit: cover;" 
+  />
+    </br>
+    </br>
+    </br>
+
     <h2 class="heading--2">How to cook it</h2>
     <p class="recipe__directions-text">
       This recipe was carefully designed and tested by

@@ -1,7 +1,14 @@
 import { async } from 'regenerator-runtime';
-import { API_URL, RECEPIE_PER_PAGE, API_KEY } from './config.js';
+import {
+  API_URL,
+  RECEPIE_PER_PAGE,
+  API_KEY,
+  REQUESTED_URL,
+  SEARCH_API_KEY,
+} from './config.js';
 import { getJson, sendJSON } from './helper.js';
 import shoppingView from './views/shoppingView.js';
+import axios from 'axios'; // Import Axios
 
 export const state = {
   recipe: {},
@@ -13,6 +20,7 @@ export const state = {
   },
   bookmarks: [],
   cart: [],
+  ingredientsState: [],
 };
 
 const createRecipe = function (recipe) {
@@ -46,6 +54,7 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     state.searchRecipe.query = query;
+    // await getTheIdOfRequiredRecipe(query);
     const data = await getJson(`${API_URL}?search=${query}&key=${API_KEY}`);
     state.searchRecipe.searchResults = data.data.recipes.map(recipe => {
       return {
@@ -145,5 +154,24 @@ export const uploadRecipe = async function (newRecipe) {
     addBookMark(state.recipe);
   } catch (err) {
     throw err;
+  }
+};
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export const getTotalCalories = async function (ingredients) {
+  try {
+    // Send POST request to analyze recipe
+    const data = await getJson(
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&apiKey=${SEARCH_API_KEY}`
+    );
+    let requiredId = data[getRandomNumber(0, data.length - 1)].id;
+    const imageURL = await getJson(
+      `https://api.spoonacular.com/recipes/${requiredId}/card?apiKey=${SEARCH_API_KEY}`
+    );
+    state.recipe.imageURL = imageURL;
+  } catch (error) {
+    console.error('Error fetching data:', error);
   }
 };
