@@ -29,7 +29,9 @@ const controlRecipes = async function () {
     });
 
     // Get The Similar Recipes =>>
-    await model.getTotalCalories(finalIngregients);
+    await model.getTotalCalories(
+      finalIngregients > 10 ? finalIngregients.slice(0, 10) : finalIngregients
+    );
     recipeView.render(model.state.recipe);
     resultsView._update(model.recipesPerPage());
     bookmarksView._update(model.state.bookmarks);
