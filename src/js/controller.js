@@ -22,16 +22,24 @@ const controlRecipes = async function () {
     // Load Recipe
     await model.loadRecipe(id);
     // Render The Recipe
-    const finalIngregients = [];
+
+    // const finalIngregients = [];
+    // model.state.recipe.ingredients.forEach(ing => {
+    //   let splittedOne = ing.description.split(' ');
+    //   finalIngregients.push(splittedOne[splittedOne.length - 1]);
+    // });
     model.state.recipe.ingredients.forEach(ing => {
       let splittedOne = ing.description.split(' ');
-      finalIngregients.push(splittedOne[splittedOne.length - 1]);
+      model.state.ingredientsState.push(splittedOne[splittedOne.length - 1]);
     });
 
     // Get The Similar Recipes =>>
     await model.getTotalCalories(
-      finalIngregients > 10 ? finalIngregients.slice(0, 10) : finalIngregients
+      model.state.ingredientsState.length > 10
+        ? model.state.ingredientsState.slice(0, 10)
+        : model.state.ingredientsState
     );
+    model.state.ingredientsState = [];
     recipeView.render(model.state.recipe);
     resultsView._update(model.recipesPerPage());
     bookmarksView._update(model.state.bookmarks);
