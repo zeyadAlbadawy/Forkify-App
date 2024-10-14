@@ -39,6 +39,8 @@ const controlRecipes = async function () {
         ? model.state.ingredientsState.slice(0, 10)
         : model.state.ingredientsState
     );
+
+    console.log(model.state.ingredientsState);
     model.state.ingredientsState = [];
     recipeView.render(model.state.recipe);
     resultsView._update(model.recipesPerPage());
