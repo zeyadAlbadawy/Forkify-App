@@ -94,15 +94,20 @@ class RecipeView extends View {
 
 
 <div class="recipe__directions">
-  <img 
-    src="${this._data.imageURL.url}" 
+${
+  this._data?.imageURL?.url
+    ? `  <img
+    src="${this._data?.imageURL?.url ? this._data.imageURL.url : ''}" 
     alt="${this._data.title}" 
     class="recipe__img" 
     style="width: 115%; height: 100%; object-fit: cover;" 
   />
     </br>
     </br>
-    </br>
+    </br>`
+    : ''
+}
+
 
     <h2 class="heading--2">How to cook it</h2>
     <p class="recipe__directions-text">
